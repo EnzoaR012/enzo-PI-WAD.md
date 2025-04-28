@@ -27,8 +27,11 @@ Neste projeto desenvolver um sistema de gerenciamento de tarefas, focando na org
 ### 2.1. Personas (Semana 01)
 
 Nome: Euler Rezende
+
 Idade: 20 anos
+
 Curso: Administração
+
 Perfil: Euler é um estudante universitário que sabe o que precisa fazer, mas sempre deixa para depois. Ele sempre costuma começar trabalhos e estudar para provas apenas na véspera pois e muito procastinador, o que gera ansiedade e noites mal dormidas. Mesmo sabendo que isso não o faz bem, ele se distrai facilmente, principalmente com redes sociais, séries e jogos.
 
 Comportamento:
