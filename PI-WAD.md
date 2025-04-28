@@ -18,8 +18,7 @@
 
 ## <a name="c1"></a>1. Introdução (Semana 01)
 
-*Preencha com até 300 palavras – sem necessidade de fonte.*
-*Descreva brevemente o sistema que você irá desenvolver.*
+Neste projeto desenvolver um sistema de gerenciamento de tarefas, focando na organização pessoal e no aumento da produtividade. Viso utilizar este, os usuários poderão criar, editar, excluir e organizar suas tarefas de maneira fácil e rápida; elas serão organizadas conforme prioridade, data de entrega e vão classificar por  status( pendente, em andamento ou concluído). Terá disponível uma interface intuitiva, possibilitando a visualização da tarefa em lista ou quadros ,parecido com o modelo do kanban, o que possibilita o monitoramento do andamento. Além das notificações para lembretes de prazo, também permitirão filtros para pesquisar de maneira mais eficaz as tarefas. O sistema terá um objetivo para diminuir a procrastinação e oferecer uma alternativa fácil e intuitiva a ser usada no dia-a-dia para estudos, trabalho ou qualquer outro tipo de processo pessoal.
 
 ---
 
