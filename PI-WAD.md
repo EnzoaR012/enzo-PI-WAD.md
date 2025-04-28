@@ -26,6 +26,18 @@ Neste projeto desenvolver um sistema de gerenciamento de tarefas, focando na org
 
 ### 2.1. Personas (Semana 01)
 
+<br>
+<div align="center">
+<sub>Foto da persona</sub>
+<br>
+<br>
+<img src="assets/Perfil2.png" width="100%">
+<br>
+<br>
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
+<br>
+
 Nome: Euler Rezende
 
 Idade: 20 anos
