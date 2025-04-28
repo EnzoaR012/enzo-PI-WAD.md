@@ -82,8 +82,6 @@ US02 | Como usuário, quero classificar as tarefas por prioridade e prazo, para 
 US03 | Como usuário, quero visualizar minhas tarefas em formato de quadro kanban, para que eu possa acompanhar facilmente o andamento de cada atividade.
 
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 Análise INVEST da User Story US01
 US01 | Como usuário, quero criar, editar e excluir tarefas, para que eu possa organizar minhas atividades.
