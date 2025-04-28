@@ -26,7 +26,37 @@ Neste projeto desenvolver um sistema de gerenciamento de tarefas, focando na org
 
 ### 2.1. Personas (Semana 01)
 
-*Posicione aqui sua(s) Persona(s) em forma de texto markdown com imagens, ou como imagem de template preenchido. Atualize esta seção ao longo do módulo se necessário.*
+Nome: Euler Rezende
+Idade: 20 anos
+Curso: Administração
+Perfil: Euler é um estudante universitário que sabe o que precisa fazer, mas sempre deixa para depois. Ele sempre costuma começar trabalhos e estudar para provas apenas na véspera pois e muito procastinador, o que gera ansiedade e noites mal dormidas. Mesmo sabendo que isso não o faz bem, ele se distrai facilmente, principalmente com redes sociais, séries e jogos.
+
+Comportamento:
+
+-Costuma anotar tarefas, mas raramente segue a lista.
+
+-Sente-se sobrecarregado quando o prazo está próximo.
+
+-Tem dificuldade de dividir grandes projetos em pequenas etapas.
+
+
+Motivações:
+
+-Quer ser mais produtivo.
+
+-Deseja não ter tanto estresse na vespera da prova.
+
+-Busca a melhora de seus habitos.
+
+Frustrações:
+
+-Sensação constante de estar "atrasado".
+
+-Perda de oportunidades por não se preparar a tempo.
+
+-Dificuldade em manter uma boa rotina.
+
+
 
 ### 2.2. User Stories (Semana 01)
 
