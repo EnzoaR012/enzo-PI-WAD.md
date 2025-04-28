@@ -75,7 +75,30 @@ Frustrações:
 
 ### 2.2. User Stories (Semana 01)
 
-*Posicione aqui a lista de User Stories levantadas para o projeto. Siga o template de User Stories e utilize a referência USXX para numeração (US01, US02, US03, ...). Indique todas as User Stories mapeadas, mesmo aquelas que não forem implementadas ao longo do projeto. Não se esqueça de explicar o INVEST de 1 User Storie prioritária.*
+US01 | Como usuário, quero criar, editar e excluir tarefas, para que eu possa gerenciar melhor minhas atividades diárias.
+
+US02 | Como usuário, quero classificar as tarefas por prioridade e prazo, para que eu possa focar primeiro nas tarefas mais urgentes e importantes.
+
+US03 | Como usuário, quero visualizar minhas tarefas em formato de quadro kanban, para que eu possa acompanhar facilmente o andamento de cada atividade.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Análise INVEST da User Story US01
+US01 | Como usuário, quero criar, editar e excluir tarefas, para que eu possa organizar minhas atividades.
+
+I – Independente: Não depende de outras funções.
+
+N – Negociável: Pode ser ajustada conforme necessário.
+
+V – Valiosa: É essencial para o usuário organizar o que precisa fazer.
+
+E – Estimável: É fácil calcular o tempo de desenvolvimento.
+
+S – Pequena: Pode ser feita em pouco tempo.
+
+T – Testável: Dá para testar criando, editando e excluindo tarefas.
 
 ---
 
