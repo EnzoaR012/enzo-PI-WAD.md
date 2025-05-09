@@ -129,7 +129,7 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 <sub>Login</sub>
 <br>
 <br>
-<img src="assets/projeto.png" width="100%">
+<img src="assets/projeto.png" width="70%">
 <br>
 <br>
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
@@ -142,7 +142,7 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 <sub>Cadastro</sub>
 <br>
 <br>
-<img src="assets/projeto1.png" width="100%">
+<img src="assets/projeto1.png" width="70%">
 <br>
 <br>
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
@@ -155,7 +155,7 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 <sub>tela inicial</sub>
 <br>
 <br>
-<img src="assets/projeto2.png" width="100%">
+<img src="assets/projeto2.png" width="70%">
 <br>
 <br>
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
@@ -168,7 +168,7 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 <sub>Lembretes</sub>
 <br>
 <br>
-<img src="assets/projeto3.png" width="100%">
+<img src="assets/projeto3.png" width="70%">
 <br>
 <br>
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
@@ -181,7 +181,7 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 <sub>Nova lista</sub>
 <br>
 <br>
-<img src="assets/projeto4.png" width="100%">
+<img src="assets/projeto4.png" width="70%">
 <br>
 <br>
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
@@ -194,7 +194,7 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 <sub>lista diaria</sub>
 <br>
 <br>
-<img src="assets/projeto5.png" width="100%">
+<img src="assets/projeto5.png" width="70%">
 <br>
 <br>
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
@@ -207,7 +207,7 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 <sub>lista semana</sub>
 <br>
 <br>
-<img src="assets/projeto6.png" width="100%">
+<img src="assets/projeto6.png" width="70%">
 <br>
 <br>
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
@@ -220,7 +220,7 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 <sub>lista mes</sub>
 <br>
 <br>
-<img src="assets/projeto7.png" width="100%">
+<img src="assets/projeto7.png" width="70%">
 <br>
 <br>
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
@@ -233,7 +233,7 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 <sub>Wireframa inteiro</sub>
 <br>
 <br>
-<img src="assets/wireframe.png" width="100%">
+<img src="assets/wireframe.png" width="70%">
 <br>
 <br>
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
