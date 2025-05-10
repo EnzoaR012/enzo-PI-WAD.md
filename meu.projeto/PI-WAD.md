@@ -104,9 +104,18 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
 
 ### 3.1. Modelagem do banco de dados  (Semana 3)
 
-*Posicione aqui os diagramas de modelos relacionais do seu banco de dados, apresentando todos os esquemas de tabelas e suas relações. Utilize texto para complementar suas explicações, se necessário.*
-
-*Posicione também o modelo físico com o Schema do BD (arquivo .sql)*
+<br>
+<div align="center">
+<sub>Diagrama banco de dados</sub>
+<br>
+<br>
+<img src="assets/modulo-banco.png" width="100%">
+<br>
+<br>
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
+<br>
+ Nesse diagrama, tem a relação entre user, taks e evento, que se conectao pelo user id
 
 ### 3.1.1 BD e Models (Semana 5)
 *Descreva aqui os Models implementados no sistema web*
