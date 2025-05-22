@@ -1,33 +1,62 @@
-//  # Arquivo principal que inicializa o servidor
-
+// Carrega variáveis de ambiente antes de tudo
 require('dotenv').config();
+console.log('🔹 server.js carregado, iniciando aplicação...');
+
 const express = require('express');
-const app = express();
-const path = require('path');
+const cors    = require('cors');
+const app     = express();
+const pool    = require('./config/db');
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// Teste de conexão inicial ao banco de dados
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('❌ Erro ao conectar no DB:', err.message);
+  } else {
+    console.log('✅ Conectado ao DB. Horário do servidor:', res.rows[0].now);
+  }
+});
 
+// Lista tabelas existentes para diagnóstico
+pool.query(
+  `SELECT table_name FROM information_schema.tables WHERE table_schema='public';`,
+  (err, res) => {
+    if (err) {
+      console.error('❌ Erro ao listar tabelas:', err.message);
+    } else {
+      console.log('📚 Tabelas no DB:', res.rows.map(row => row.table_name).join(', '));
+    }
+  }
+);
+
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('❌ Erro ao conectar no DB:', err.message);
+  } else {
+    console.log('✅ Conectado ao DB. Horário do servidor:', res.rows[0].now);
+  }
+});
+
+// Importa rotas
+const userRoutes  = require('./routes/userRoutes');
+const eventRoutes = require('./routes/eventRoutes');
+const taskRoutes  = require('./routes/taskRoutes');
+
+// Middlewares
+app.use(cors());
 app.use(express.json());
 
-const userRoutes = require('./routes/userRoutes');
-app.use('/users', userRoutes);
-
-const frontendRoutes = require('./routes/frontRoutes');
-app.use('/', frontendRoutes);
-
-// Middleware para rota não encontrada
-app.use((req, res, next) => {
-  res.status(404).send('Página não encontrada');
+// Rota raiz para facilitar testes
+app.get('/', (req, res) => {
+  res.send('API rodando! Use /users, /events ou /tasks');
 });
 
-// Middleware para erro interno
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Erro no servidor');
-});
+// Monta as rotas
+app.use('/users',  userRoutes);
+app.use('/events', eventRoutes);
+app.use('/tasks',  taskRoutes);
 
+// Inicia servidor escutando em todas as interfaces
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT} , http://localhost:3000/users`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 });
