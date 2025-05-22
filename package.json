@@ -1,23 +1,5 @@
 {
-  "name": "enzo-pi-wad.md",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EnzoaR012/enzo-PI-WAD.md.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/EnzoaR012/enzo-PI-WAD.md/issues"
-  },
-  "homepage": "https://github.com/EnzoaR012/enzo-PI-WAD.md#readme",
-  "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "@supabase/supabase-js": "^2.49.7"
   }
 }
