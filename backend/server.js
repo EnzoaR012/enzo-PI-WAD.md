@@ -29,15 +29,17 @@ pool.query(
 );
 
 // Importa rotas
-const userRoutes  = require('./routes/userRoutes');
-const eventRoutes = require('./routes/eventRoutes');
-const taskRoutes  = require('./routes/taskRoutes');
+const userRoutes     = require('./routes/userRoutes');
+const eventRoutes    = require('./routes/eventRoutes');
+const taskRoutes     = require('./routes/taskRoutes');
+const reminderRoutes = require('./routes/reminderRoutes');
+const listRoutes     = require('./routes/listRoutes');
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Rota raiz interativa com links para endpoints
+// Rota raiz interativa com links para todos os endpoints
 app.get('/', (req, res) => {
   res.send(`
 <!DOCTYPE html>
@@ -64,16 +66,23 @@ app.get('/', (req, res) => {
     <li><strong>POST</strong> <a href="/events">/events</a> – Cria evento</li>
     <li><strong>GET</strong> <a href="/tasks">/tasks</a> – Lista tarefas</li>
     <li><strong>POST</strong> <a href="/tasks">/tasks</a> – Cria tarefa</li>
+    <li><strong>GET</strong> <a href="/reminders">/reminders</a> – Lista lembretes</li>
+    <li><strong>POST</strong> <a href="/reminders">/reminders</a> – Cria lembrete</li>
+    <li><strong>GET</strong> <a href="/lists">/lists</a> – Lista listas</li>
+    <li><strong>POST</strong> <a href="/lists">/lists</a> – Cria lista</li>
+    <li><strong>POST</strong> <a href="/lists/task">/lists/task</a> – Adiciona tarefa à lista</li>
   </ul>
 </body>
 </html>
   `);
 });
 
-// Monta as rotas
-app.use('/users',  userRoutes);
-app.use('/events', eventRoutes);
-app.use('/tasks',  taskRoutes);
+// Monta todas as rotas
+app.use('/users',     userRoutes);
+app.use('/events',    eventRoutes);
+app.use('/tasks',     taskRoutes);
+app.use('/reminders', reminderRoutes);
+app.use('/lists',     listRoutes);
 
 // Inicia servidor escutando em todas as interfaces
 const PORT = process.env.PORT || 3000;
