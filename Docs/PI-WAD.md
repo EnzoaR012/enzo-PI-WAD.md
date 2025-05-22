@@ -118,11 +118,60 @@ T – Testável: Dá para testar criando, editando e excluindo tarefas.
  Nesse diagrama, tem a relação entre user, taks e evento, que se conectao pelo user id
 
 ### 3.1.1 BD e Models (Semana 5)
-*Descreva aqui os Models implementados no sistema web*
+
+  - Tabela: `users`  
+  - Campos:  
+    - `id` (UUID) – chave primária  
+    - `name` (TEXT) – nome do usuário  
+    - `email` (TEXT) – e-mail único  
+    - `password` (TEXT) – senha  
+    - `birth_date` (DATE) – data de nascimento  
+    - `created_at` (TIMESTAMP) – registro de criação  
+
+- **EventModel**  
+  - Tabela: `events`  
+  - Campos:  
+    - `id` (UUID) – chave primária  
+    - `user_id` (UUID) – FK para `users.id`  
+    - `title` (TEXT) – título do evento  
+    - `description` (TEXT) – descrição opcional  
+    - `event_date` (DATE) – data do evento  
+    - `created_at` (TIMESTAMP) – registro de criação  
+
+- **TaskModel**  
+  - Tabela: `tasks`  
+  - Campos:  
+    - `id` (UUID) – chave primária  
+    - `event_id` (UUID) – FK para `events.id`  
+    - `title` (TEXT) – título da tarefa  
+    - `size` (TEXT) – tamanho da tarefa  
+    - `duration_minutes` (NUMERIC) – duração em minutos  
+    - `done` (BOOLEAN) – status de conclusão  
+    - `created_at` (TIMESTAMP) – registro de criação  
+
+Todos os Models são acessados no backend pelos serviços em `services/` e manipulados pelos Controllers em `controllers/`, seguindo o padrão MVC sem uso de ORM.
 
 ### 3.2. Arquitetura (Semana 5)
 
-*Posicione aqui o diagrama de arquitetura da sua solução de aplicação web. Atualize sempre que necessário.*
+```mermaid
+flowchart TB
+    subgraph View [View<br>Interface]
+        A[Frontend HTML/JS]
+    end
+
+    subgraph Controller [Controller<br>Business Logic]
+        B[UserController\nEventController\nTaskController]
+    end
+
+    subgraph Model [Model<br>Data Layer]
+        C[(PostgreSQL Tables:\nusers, events, tasks)]
+    end
+
+    A -->|HTTP Request| B
+    B -->|SQL Query| C
+    C -->|Query Result| B
+    B -->|HTTP Response| A
+
 
 **Instruções para criação do diagrama de arquitetura**  
 - **Model**: A camada que lida com a lógica de negócios e interage com o banco de dados.
