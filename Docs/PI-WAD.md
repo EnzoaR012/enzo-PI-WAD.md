@@ -312,8 +312,8 @@ https://www.figma.com/design/mgrzrAlEB3nWsHy0Y6y6m9/Untitled?node-id=0-1&t=QlKaF
 *Posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelidade e o link para acesso ao protótipo completo (mantenha o link sempre público para visualização).*
 
 ### 3.6. WebAPI e endpoints (Semana 05)
-
-*Utilize um link para outra página de documentação contendo a descrição completa de cada endpoint. Ou descreva aqui cada endpoint criado para seu sistema.*  
+  
+https://docs.google.com/document/d/1vj0mvv-DinUWmTqMJxs-_Lmc_Cl4yF1V9EtyZoEtSvw/edit?usp=sharing
 
 ### 3.7 Interface e Navegação (Semana 07)
 
