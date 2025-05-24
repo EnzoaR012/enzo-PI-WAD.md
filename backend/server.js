@@ -23,37 +23,66 @@ pool.query(
     if (err) {
       console.error('❌ Erro ao listar tabelas:', err.message);
     } else {
-      console.log('📚 Tabelas no DB:', res.rows.map(row => row.table_name).join(', '));
+      console.log('📚 Tabelas no DB:', res.rows.map(r => r.table_name).join(', '));
     }
   }
 );
 
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('❌ Erro ao conectar no DB:', err.message);
-  } else {
-    console.log('✅ Conectado ao DB. Horário do servidor:', res.rows[0].now);
-  }
-});
-
 // Importa rotas
-const userRoutes  = require('./routes/userRoutes');
-const eventRoutes = require('./routes/eventRoutes');
-const taskRoutes  = require('./routes/taskRoutes');
+const userRoutes     = require('./routes/userRoutes');
+const eventRoutes    = require('./routes/eventRoutes');
+const taskRoutes     = require('./routes/taskRoutes');
+const reminderRoutes = require('./routes/reminderRoutes');
+const listRoutes     = require('./routes/listRoutes');
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Rota raiz para facilitar testes
+// Rota raiz interativa com links para todos os endpoints
 app.get('/', (req, res) => {
-  res.send('API rodando! Use /users, /events ou /tasks');
+  res.send(`
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>API Rotas Disponíveis</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    h1 { color: #333; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 0.5rem 0; }
+    a { text-decoration: none; color: #0066cc; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>Rotas Disponíveis</h1>
+  <ul>
+    <li><strong>GET</strong> <a href="/users">/users</a> – Lista usuários</li>
+    <li><strong>POST</strong> <a href="/users">/users</a> – Cria usuário</li>
+    <li><strong>GET</strong> <a href="/events">/events</a> – Lista eventos</li>
+    <li><strong>POST</strong> <a href="/events">/events</a> – Cria evento</li>
+    <li><strong>GET</strong> <a href="/tasks">/tasks</a> – Lista tarefas</li>
+    <li><strong>POST</strong> <a href="/tasks">/tasks</a> – Cria tarefa</li>
+    <li><strong>GET</strong> <a href="/reminders">/reminders</a> – Lista lembretes</li>
+    <li><strong>POST</strong> <a href="/reminders">/reminders</a> – Cria lembrete</li>
+    <li><strong>GET</strong> <a href="/lists">/lists</a> – Lista listas</li>
+    <li><strong>POST</strong> <a href="/lists">/lists</a> – Cria lista</li>
+    <li><strong>POST</strong> <a href="/lists/task">/lists/task</a> – Adiciona tarefa à lista</li>
+  </ul>
+</body>
+</html>
+  `);
 });
 
-// Monta as rotas
-app.use('/users',  userRoutes);
-app.use('/events', eventRoutes);
-app.use('/tasks',  taskRoutes);
+// Monta todas as rotas
+app.use('/users',     userRoutes);
+app.use('/events',    eventRoutes);
+app.use('/tasks',     taskRoutes);
+app.use('/reminders', reminderRoutes);
+app.use('/lists',     listRoutes);
 
 // Inicia servidor escutando em todas as interfaces
 const PORT = process.env.PORT || 3000;

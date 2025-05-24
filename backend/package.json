@@ -1,14 +1,16 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "migrate": "node migrations/migrate.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Backend API para gerenciamento de usuários, eventos e tarefas",
   "dependencies": {
     "@supabase/supabase-js": "^2.49.7",
     "cors": "^2.8.5",

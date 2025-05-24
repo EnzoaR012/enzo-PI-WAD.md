@@ -46,34 +46,45 @@ Sistema web para cadastro e gerenciamento de usuários, eventos e tarefas, desen
      DATABASE_URL=postgresql://postgres:SUA_SENHA@seu-host.supabase.co:5432/postgres
      PORT=3000
      ```
-4. **Crie as tabelas** (se ainda não tiver)
+4. **Migração do banco de dados**
 
-   * No Supabase, execute este SQL:
+   Ainda em `backend/`, execute:
 
-     ```sql
-     DROP TABLE IF EXISTS users, events, tasks CASCADE;
-     CREATE TABLE users (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, password TEXT NOT NULL, birth_date DATE NOT NULL, created_at TIMESTAMP DEFAULT NOW());
-     CREATE TABLE events (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), user_id UUID REFERENCES users(id) ON DELETE CASCADE, title TEXT NOT NULL, description TEXT, event_date DATE NOT NULL, created_at TIMESTAMP DEFAULT NOW());
-     CREATE TABLE tasks (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), event_id UUID REFERENCES events(id) ON DELETE CASCADE, title TEXT NOT NULL, size TEXT, duration_minutes NUMERIC, done BOOLEAN DEFAULT FALSE, created_at TIMESTAMP DEFAULT NOW());
-     ```
+   ```bash
+   npm run migrate
+   ```
+
+   Isso criará as tabelas `users`, `events` e `tasks` automaticamente.
 
 ## Execução
 
 ### Backend
 
-1. Dentro de `backend/`, rode:
+1. Dentro do diretório `backend/`, suba o servidor:
 
    ```bash
-   node server.js
+   npm start
    ```
-2. Verifique no console:
+
+2. No console, verifique as mensagens iniciais:
+
+   ```text
+   🔹 server.js carregado, iniciando aplicação...
+   ✅ Conectado ao DB. Horário do servidor: 2025-05-21T23:59:50.665Z
+   📚 Tabelas no DB: users, events, tasks
+   🚀 Servidor rodando em http://localhost:3000
+   ```
+
+3. Abra o navegador em:
 
    ```
    ```
 
-🚀 Servidor rodando em [http://localhost:3000](http://localhost:3000)
+[http://localhost:3000](http://localhost:3000)
 
 ```
+
+   Você verá uma página HTML listando todos os endpoints disponíveis como links interativos.
 
 ### Frontend
 
@@ -95,8 +106,4 @@ Sistema web para cadastro e gerenciamento de usuários, eventos e tarefas, desen
 1. Insira registros via API (cURL, Postman ou formulário frontend).
 2. Atualize o frontend para ver os dados em tempo real.
 
----
 
-*Desenvolvido por Enzo sob orientação de Ryan — Maio de 2025*
-
-```
