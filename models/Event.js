@@ -1,34 +1,33 @@
-//# Definição de modelos de dados (estrutura do banco)
 const pool = require('../config/db');
 
 
-async function getAllUsers() {
-  const { rows } = await pool.query('SELECT * FROM users ORDER BY id');
+async function getAllEvents() {
+  const { rows } = await pool.query('SELECT * FROM events ORDER BY id');
   return rows;
 }
 
 
-async function getUserById(id) {
+async function getEventById(id) {
   const { rows } = await pool.query(
-    'SELECT * FROM users WHERE id = $1',
+    'SELECT * FROM events WHERE id = $1',
     [id]
   );
   return rows[0];
 }
 
 
-async function createUser({ name, email }) {
+async function createEvent({ title, date, location }) {
   const { rows } = await pool.query(
-    `INSERT INTO users (name, email)
-     VALUES ($1, $2)
+    `INSERT INTO events (title, date, location)
+     VALUES ($1, $2, $3)
      RETURNING *`,
-    [name, email]
+    [title, date, location]
   );
   return rows[0];
 }
 
 
-async function updateUser(id, fields) {
+async function updateEvent(id, fields) {
   const sets = [];
   const vals = [];
   let idx = 1;
@@ -38,7 +37,7 @@ async function updateUser(id, fields) {
     idx++;
   }
   const { rows } = await pool.query(
-    `UPDATE users SET ${sets.join(', ')}
+    `UPDATE events SET ${sets.join(', ')}
      WHERE id = $${idx}
      RETURNING *`,
     [...vals, id]
@@ -47,9 +46,9 @@ async function updateUser(id, fields) {
 }
 
 
-async function deleteUser(id) {
+async function deleteEvent(id) {
   const { rowCount } = await pool.query(
-    'DELETE FROM users WHERE id = $1',
+    'DELETE FROM events WHERE id = $1',
     [id]
   );
   return rowCount > 0;
@@ -57,9 +56,9 @@ async function deleteUser(id) {
 
 
 module.exports = {
-  getAllUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
+  getAllEvents,
+  getEventById,
+  createEvent,
+  updateEvent,
+  deleteEvent,
 };
