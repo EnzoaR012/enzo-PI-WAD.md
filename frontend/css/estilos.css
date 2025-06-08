@@ -1,0 +1,270 @@
+/* css/estilos.css */
+
+/* ============================================================= */
+/*                   VARIÁVEIS DE CORES/ESPAÇAMENTOS             */
+/* ============================================================= */
+:root {
+  /* Fonte principal */
+  --font-family: 'Archer', serif;
+
+  /* Paleta de cores (conforme seu guia) */
+  --cor-primaria: #560863;    /* Roxo Escuro (Primary)     */
+  --cor-secundaria: #002718;  /* Verde Escuro (Secondary)  */
+  --cor-acento: #2CBFFC;      /* Azul Claro (Accent)       */
+  --cor-texto: #333;          /* Texto padrão */
+  --cor-fundo: #f4f4f4;       /* Fundo geral do site       */
+  --cor-branco: #ffffff;      /* Branco */
+  
+  /* Tipografia */
+  --fonte-base: 16px;         /* 1rem = 16px */
+  /* Ajustei os valores para que os títulos não fiquem exageradamente grandes */
+  --heading-1-size: 2.5rem;    /* Antes: 8rem  – Agora ≈ 40px */
+  --heading-2-size: 1.75rem;   /* Antes: 6.667rem – Agora ≈ 28px */
+  --heading-3-size: 1.25rem;   /* Antes: 5.333rem – Agora ≈ 20px */
+  --heading-4-size: 1rem;      /* Antes: 4rem – Agora ≈ 16px */
+  
+  /* Espaçamentos */
+  --padding-base: 1rem;
+  --radius-base: 0.25rem;      /* 4px */
+}
+
+/* ============================================================= */
+/*                     RESET / GLOBAL STYLES                     */
+/* ============================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--fonte-base);
+  line-height: 1.5;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  padding: var(--padding-base);
+}
+
+h1 {
+  font-size: var(--heading-1-size);
+  line-height: 1.1;
+  color: var(--cor-primaria);
+  margin-bottom: var(--padding-base);
+}
+
+h2 {
+  font-size: var(--heading-2-size);
+  line-height: 1.1;
+  color: var(--cor-primaria);
+  margin-bottom: var(--padding-base);
+}
+
+h3 {
+  font-size: var(--heading-3-size);
+  color: var(--cor-primaria);
+  margin-bottom: var(--padding-base);
+}
+
+h4, h5, h6 {
+  font-size: var(--heading-4-size);
+  color: var(--cor-primaria);
+  margin-bottom: var(--padding-base);
+}
+
+/* Unordered list */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* ============================================================= */
+/*                       SEÇÕES / CONTAINERS                      */
+/* ============================================================= */
+section {
+  background-color: var(--cor-branco);
+  padding: var(--padding-base);
+  border-radius: var(--radius-base);
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================= */
+/*                       FORMULÁRIOS E CAMPOS                     */
+/* ============================================================= */
+.form-group {
+  margin-bottom: var(--padding-base);
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius-base);
+  font-family: var(--font-family);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* ============================================================= */
+/*                         ESTILO DE BOTÕES                        */
+/* ============================================================= */
+/* Botão base: aplica padding, border-radius e cursor */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-base);
+  transition: opacity 0.2s ease;
+}
+
+/* Botão primário (Primary) */
+.btn-primary {
+  background-color: var(--cor-primaria);
+  color: var(--cor-branco);
+}
+
+/* Botão secundário (Secondary) */
+.btn-secondary {
+  background-color: var(--cor-secundaria);
+  color: var(--cor-branco);
+}
+
+/* Botão de Acento (Accent) – use se precisar de um terceiro tipo */
+.btn-accent {
+  background-color: var(--cor-acento);
+  color: var(--cor-branco);
+}
+
+/* Tamanhos de botão (Small, Normal, Large) */
+.btn-small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.btn-normal {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.btn-large {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Hover para todos os botões */
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-accent:hover {
+  opacity: 0.9;
+}
+
+/* Exemplo de botão com ícone (se quiser adicionar algum ícone inline) */
+.btn i {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* ============================================================= */
+/*                            LISTAS                              */
+/* ============================================================= */
+.lista-itens {
+  list-style: none;
+  padding-left: 0;
+}
+
+.lista-itens li {
+  background-color: var(--cor-branco);
+  border: 1px solid #ddd;
+  border-radius: var(--radius-base);
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Ações dentro de cada item (Editar/Excluir) */
+.botoes-acoes {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+/* ============================================================= */
+/*                           MODAL                                */
+/* ============================================================= */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.oculto {
+  display: none;
+}
+
+.modal-conteudo {
+  background-color: var(--cor-branco);
+  border-radius: var(--radius-base);
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.modal-conteudo h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--cor-primaria);
+}
+
+/* ============================================================= */
+/*                         RESPONSIVIDADE                        */
+/* ============================================================= */
+@media (max-width: 600px) {
+  .modal-conteudo {
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 2rem;   /* Reduzi de 4rem (tela pequena) para 2rem */
+  }
+  h2 {
+    font-size: 1.5rem; /* Reduzi de 3rem para 1.5rem */
+  }
+  h3 {
+    font-size: 1.25rem; /* Reduzi de 2.5rem para 1.25rem */
+  }
+  li {
+    font-size: 1rem;
+  }
+}

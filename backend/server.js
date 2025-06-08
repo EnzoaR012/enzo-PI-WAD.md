@@ -1,13 +1,16 @@
-// Carrega variáveis de ambiente antes de tudo
+// backend/server.js
+
+// 1) Carrega variáveis de ambiente antes de tudo
 require('dotenv').config();
 console.log('🔹 server.js carregado, iniciando aplicação...');
 
 const express = require('express');
 const cors    = require('cors');
+const path    = require('path');
 const app     = express();
-const pool    = require('./config/db');
+const pool    = require('./config/db'); // sua conexão com o DB
 
-// Teste de conexão inicial ao banco de dados
+// 2) Teste de conexão inicial ao banco de dados
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
     console.error('❌ Erro ao conectar no DB:', err.message);
@@ -16,9 +19,11 @@ pool.query('SELECT NOW()', (err, res) => {
   }
 });
 
-// Lista tabelas existentes para diagnóstico
+// 3) Lista tabelas existentes para diagnóstico (opcional)
 pool.query(
-  `SELECT table_name FROM information_schema.tables WHERE table_schema='public';`,
+  `SELECT table_name 
+     FROM information_schema.tables 
+    WHERE table_schema='public';`,
   (err, res) => {
     if (err) {
       console.error('❌ Erro ao listar tabelas:', err.message);
@@ -28,64 +33,89 @@ pool.query(
   }
 );
 
-// Importa rotas
+// 4) Importa rotas de API existentes
 const userRoutes     = require('./routes/userRoutes');
 const eventRoutes    = require('./routes/eventRoutes');
 const taskRoutes     = require('./routes/taskRoutes');
 const reminderRoutes = require('./routes/reminderRoutes');
 const listRoutes     = require('./routes/listRoutes');
 
-// Middlewares
+// 5) Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Rota raiz interativa com links para todos os endpoints
+// 6) SERVIR ARQUIVOS ESTÁTICOS DO FRONTEND
+//    Tudo dentro de "../frontend" ficará disponível sob "/"
+//    Exemplo: 
+//      "/index.html" → "../frontend/index.html"
+//      "/css/estilos.css" → "../frontend/css/estilos.css"
+//      "/js/reminder.js" → "../frontend/js/reminder.js"
+//      "/img/logo.png" → "../frontend/img/logo.png"
+//    ... e assim por diante para todo conteúdo estático do seu front.
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+// 7) ROTA RAIZ ("/") → redireciona para a tela de login (index.html)
 app.get('/', (req, res) => {
-  res.send(`
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>API Rotas Disponíveis</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; }
-    h1 { color: #333; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 0.5rem 0; }
-    a { text-decoration: none; color: #0066cc; }
-    a:hover { text-decoration: underline; }
-  </style>
-</head>
-<body>
-  <h1>Rotas Disponíveis</h1>
-  <ul>
-    <li><strong>GET</strong> <a href="/users">/users</a> – Lista usuários</li>
-    <li><strong>POST</strong> <a href="/users">/users</a> – Cria usuário</li>
-    <li><strong>GET</strong> <a href="/events">/events</a> – Lista eventos</li>
-    <li><strong>POST</strong> <a href="/events">/events</a> – Cria evento</li>
-    <li><strong>GET</strong> <a href="/tasks">/tasks</a> – Lista tarefas</li>
-    <li><strong>POST</strong> <a href="/tasks">/tasks</a> – Cria tarefa</li>
-    <li><strong>GET</strong> <a href="/reminders">/reminders</a> – Lista lembretes</li>
-    <li><strong>POST</strong> <a href="/reminders">/reminders</a> – Cria lembrete</li>
-    <li><strong>GET</strong> <a href="/lists">/lists</a> – Lista listas</li>
-    <li><strong>POST</strong> <a href="/lists">/lists</a> – Cria lista</li>
-    <li><strong>POST</strong> <a href="/lists/task">/lists/task</a> – Adiciona tarefa à lista</li>
-  </ul>
-</body>
-</html>
-  `);
+  res.redirect('/index.html');
 });
 
-// Monta todas as rotas
+// 8) EM CASO DE QUERER ENTREGAR CADA PÁGINA COM ROTA EXPLÍCITA
+//    (não é estritamente necessário, já que express.static cobre, 
+//     mas mantive aqui para que você tenha o controle “manual”):
+app.get('/index.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+app.get('/register.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/register.html'));
+});
+app.get('/dashboard.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dashboard.html'));
+});
+app.get('/reminders.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/reminders.html'));
+});
+app.get('/newlist.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/newlist.html'));
+});
+app.get('/daily.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/daily.html'));
+});
+app.get('/weekly.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/weekly.html'));
+});
+app.get('/monthly.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/monthly.html'));
+});
+
+// 9) ROTA DE LOGOUT (OPCIONAL):
+//    Se você quiser invalidar algo no servidor ao deslogar, 
+//    crie uma rota que limpe sessão, cookie, token etc.
+//    Neste exemplo, apenas redireciona para a tela de login.
+app.get('/logout', (req, res) => {
+  // aqui você poderia destruir sessão ou cookie, se aplicável
+  return res.redirect('/index.html');
+});
+
+// 10) MONTAGEM DAS ROTAS DE API (JSON)
+//     Todas as rotas de API continuam funcionando normalmente:
 app.use('/users',     userRoutes);
 app.use('/events',    eventRoutes);
 app.use('/tasks',     taskRoutes);
 app.use('/reminders', reminderRoutes);
 app.use('/lists',     listRoutes);
 
-// Inicia servidor escutando em todas as interfaces
+// 11) CATCH‐ALL OPICIONAL PARA FRONT‐END 
+//     Se você quiser que qualquer rota que não seja API seja redirecionada
+//     automaticamente para a tela de login, descomente abaixo:
+//
+// app.get('*', (req, res) => {
+//   res.redirect('/index.html');
+// });
+
+// 12) INICIA O SERVIDOR
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+  console.log(`🔗 Abra http://localhost:${PORT}/index.html para acessar a interface.`);
 });

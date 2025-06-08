@@ -1,0 +1,64 @@
+<!-- Exemplo mínimo de lembretes.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Lembretes</title>
+  <link rel="stylesheet" href="/css/estilos.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/dashboard">Home</a>
+    <a href="/lembretes" class="active">Lembretes</a>
+    <a href="/nova-lista">Nova Lista</a>
+    <a href="/lista-diaria">Lista Diária</a>
+    <a href="/lista-semanal">Lista Semanal</a>
+    <a href="/lista-mensal">Lista Mensal</a>
+    <button id="btn-logout" class="btn btn-secondary btn-small">Sair</button>
+  </nav>
+
+  <main class="main-content">
+    <h1>Lembretes</h1>
+    <!-- Botão que abre o modal “criar novo lembrete” -->
+    <button id="btn-novo-lembrete" class="btn btn-primary btn-normal">
+      + Novo Lembrete
+    </button>
+
+    <!-- UL que receberá cada lembrete via JS -->
+    <ul id="reminders-list" class="lista-itens">
+      <li>Carregando lembretes...</li>
+    </ul>
+  </main>
+
+  <!-- Modal de criação/edição de lembrete -->
+  <div id="modal-lembrete" class="modal oculto">
+    <div class="modal-conteudo">
+      <h3 id="titulo-modal-lembrete">Criar Novo Lembrete</h3>
+      <form id="form-lembrete" class="formulario-modal">
+        <input type="hidden" name="id" />
+
+        <div class="form-group">
+          <label for="title">Título:</label>
+          <input type="text" id="title" name="title" required />
+        </div>
+        <div class="form-group">
+          <label for="date">Data:</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+        <div class="form-group">
+          <label for="description">Descrição:</label>
+          <textarea id="description" name="description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-normal">Salvar</button>
+        <button type="button" class="btn btn-secondary btn-normal" id="btn-cancelar-lembrete">
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Inclua o reminder.js ao final do body -->
+  <script src="/js/reminder.js"></script>
+</body>
+</html>
