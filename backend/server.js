@@ -110,12 +110,12 @@ app.use('/lists',     listRoutes);
 //     automaticamente para a tela de login, descomente abaixo:
 //
 // app.get('*', (req, res) => {
-//   res.redirect('/index.html');
+//   res.redirect('/dashboard.html');
 // });
 
 // 12) INICIA O SERVIDOR
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
-  console.log(`🔗 Abra http://localhost:${PORT}/index.html para acessar a interface.`);
+  console.log(`🔗 Abra http://localhost:${PORT}/dashboard.html para acessar a interface.`);
 });

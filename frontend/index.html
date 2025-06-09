@@ -3,74 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Dashboard de Eventos</title>
-  <!-- Link para o CSS que segue as diretrizes do guia de estilo -->
+  <title>Bem-vindo • Uriel’s</title>
   <link rel="stylesheet" href="css/estilos.css" />
+  <style>
+    /* Estilos específicos para a tela de login mobile */
+    .login-container {
+      max-width: 360px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    .login-container h1 {
+      font-size: var(--heading-2-size);
+      margin-bottom: 2rem;
+      color: var(--cor-primaria);
+      font-family: var(--font-family);
+    }
+    .login-box {
+      background-color: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-base);
+      padding: 2rem 1rem;
+    }
+    .login-box form {
+      display: flex;
+      flex-direction: column;
+    }
+    .input-field {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: var(--radius-base);
+      font-family: var(--font-family);
+    }
+    .btn-block {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #aaa;
+    }
+    .divider::before { margin-right: 0.5em; }
+    .divider::after  { margin-left: 0.5em; }
+  </style>
 </head>
 <body>
-  <h1>Home</h1>
-
-  <!-- ========== SEÇÃO DE USUÁRIOS ========== -->
-  <section id="users-section">
-    <h2>Usuários</h2>
-    <!-- Botão “+ Novo” usa classe .btn-primary para o estilo primário -->
-    <button id="btn-novo-usuario" class="btn btn-primary btn-normal">+ Novo Usuário</button>
-    <ul id="users-list">
-      <li>Carregando...</li>
-    </ul>
-  </section>
-
-  <!-- Modal para criar/editar usuário -->
-  <div id="modal-usuario" class="modal oculto">
-    <div class="modal-conteudo">
-      <h3 id="titulo-modal-usuario">Criar Novo Usuário</h3>
-      <form id="form-usuario">
-        <input type="hidden" id="usuario-id" name="id" />
-
-        <div class="form-group">
-          <label for="usuario-name">Nome:</label>
-          <input type="text" id="usuario-name" name="name" required />
-        </div>
-        <div class="form-group">
-          <label for="usuario-email">E-mail:</label>
-          <input type="email" id="usuario-email" name="email" required />
-        </div>
-        <button type="submit" class="btn btn-primary btn-normal">Salvar</button>
-        <button type="button" class="btn btn-secondary btn-normal" id="btn-cancelar-usuario">
-          Cancelar
-        </button>
+  <div class="login-container">
+    <h1>Bem-vindo ao Uriel’s</h1>
+    <div class="login-box">
+      <form id="login-form">
+        <input type="email" id="login-email" class="input-field" placeholder="Email" required />
+        <input type="password" id="login-password" class="input-field" placeholder="Senha" required />
+        <button type="submit" class="btn btn-primary btn-normal btn-block">Login</button>
       </form>
+
+      <div class="divider">OU</div>
+
+      <a href="register.html" class="btn btn-secondary btn-normal btn-block">Cadastre-se</a>
     </div>
   </div>
 
-  <!-- ========== SEÇÃO DE EVENTOS ========== -->
-  <section id="events-section">
-    <h2>Eventos</h2>
-    <button id="btn-novo-evento" class="btn btn-primary btn-normal">+ Novo Evento</button>
-    <ul id="events-list">
-      <li>Carregando...</li>
-    </ul>
-  </section>
-
-  <!-- Modal para criar/editar evento -->
-  <div id="modal-evento" class="modal oculto">
-    <div class="modal-conteudo">
-      <h3 id="titulo-modal-evento">Criar Novo Evento</h3>
-      <form id="form-evento">
-        <input type="hidden" id="evento-id" name="id" />
-
-        <div class="form-group">
-          <label for="evento-title">Título:</label>
-          <input type="text" id="evento-title" name="title" required />
-        </div>
-        <div class="form-group">
-          <label for="evento-date">Data:</label>
-          <input type="date" id="evento-date" name="event_date" required />
-        </div>
-        <div class="form-group">
-          <label for="evento-desc">Descrição:</label>
-          <textarea id="evento-desc" name="description"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-normal">Salvar</button>
-        <button type="button" class="btn btn-secondary btn-normal" id="btn-cancelar
-
+  <script src="js/auth.js"></script>
+</body>
+</html>
