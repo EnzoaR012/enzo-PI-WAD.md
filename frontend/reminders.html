@@ -1,64 +1,125 @@
-<!-- Exemplo mínimo de lembretes.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Lembretes</title>
-  <link rel="stylesheet" href="/css/estilos.css" />
+  <title>Lembretes • Meu Sistema</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <style>
+    /* Layout: sidebar + conteúdo */
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      background-color: #202020;
+      width: 220px;
+      padding: var(--padding-base);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar .logo img {
+      max-width: 100px;
+      margin: 0 auto 1.5rem;
+      display: block;
+    }
+    .sidebar nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar nav li {
+      margin: 0.75rem 0;
+    }
+    .sidebar nav a {
+      color: var(--cor-branco);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      text-decoration: underline;
+    }
+    .sidebar .logout button {
+      width: 100%;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: var(--padding-base);
+      background-color: var(--cor-fundo);
+    }
+    .main-content header h1 {
+      font-size: var(--heading-2-size);
+      color: var(--cor-primaria);
+      margin-bottom: var(--padding-base);
+    }
+  </style>
 </head>
 <body>
-  <nav class="navbar">
-    <a href="/dashboard">Home</a>
-    <a href="/lembretes" class="active">Lembretes</a>
-    <a href="/nova-lista">Nova Lista</a>
-    <a href="/lista-diaria">Lista Diária</a>
-    <a href="/lista-semanal">Lista Semanal</a>
-    <a href="/lista-mensal">Lista Mensal</a>
-    <button id="btn-logout" class="btn btn-secondary btn-small">Sair</button>
-  </nav>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="img/logo.png" alt="Logo do Sistema" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">Início</a></li>
+          <li><a href="reminders.html" class="active">Lembretes</a></li>
+          <li><a href="newlist.html">Nova Lista</a></li>
+          <li><a href="daily.html">Lista Diária</a></li>
+          <li><a href="weekly.html">Lista Semanal</a></li>
+          <li><a href="monthly.html">Lista Mensal</a></li>
+        </ul>
+      </nav>
+      <div class="logout">
+        <button id="btn-logout" class="btn btn-secondary btn-normal">Logout</button>
+      </div>
+    </aside>
 
-  <main class="main-content">
-    <h1>Lembretes</h1>
-    <!-- Botão que abre o modal “criar novo lembrete” -->
-    <button id="btn-novo-lembrete" class="btn btn-primary btn-normal">
-      + Novo Lembrete
-    </button>
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+      <header>
+        <h1>Lembretes</h1>
+      </header>
+      <button id="btn-novo-lembrete" class="btn btn-primary btn-normal">+ Novo Lembrete</button>
+      <ul id="reminders-list" class="lista-itens">
+        <li>Carregando lembretes...</li>
+      </ul>
 
-    <!-- UL que receberá cada lembrete via JS -->
-    <ul id="reminders-list" class="lista-itens">
-      <li>Carregando lembretes...</li>
-    </ul>
-  </main>
-
-  <!-- Modal de criação/edição de lembrete -->
-  <div id="modal-lembrete" class="modal oculto">
-    <div class="modal-conteudo">
-      <h3 id="titulo-modal-lembrete">Criar Novo Lembrete</h3>
-      <form id="form-lembrete" class="formulario-modal">
-        <input type="hidden" name="id" />
-
-        <div class="form-group">
-          <label for="title">Título:</label>
-          <input type="text" id="title" name="title" required />
+      <!-- Modal de criação/edição de lembrete -->
+      <div id="modal-lembrete" class="modal oculto">
+        <div class="modal-conteudo">
+          <h3 id="titulo-modal-lembrete">Criar Novo Lembrete</h3>
+          <form id="form-lembrete">
+            <input type="hidden" name="id" />
+            <div class="form-group">
+              <label for="title">Título:</label>
+              <input type="text" id="title" name="title" required />
+            </div>
+            <div class="form-group">
+              <label for="date">Data:</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="form-group">
+              <label for="description">Descrição:</label>
+              <textarea id="description" name="description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-normal">Salvar</button>
+            <button type="button" class="btn btn-secondary btn-normal" id="btn-cancelar-lembrete">Cancelar</button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="date">Data:</label>
-          <input type="date" id="date" name="date" required />
-        </div>
-        <div class="form-group">
-          <label for="description">Descrição:</label>
-          <textarea id="description" name="description"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-normal">Salvar</button>
-        <button type="button" class="btn btn-secondary btn-normal" id="btn-cancelar-lembrete">
-          Cancelar
-        </button>
-      </form>
-    </div>
+      </div>
+    </main>
   </div>
 
-  <!-- Inclua o reminder.js ao final do body -->
-  <script src="/js/reminder.js"></script>
+  <script src="js/reminder.js"></script>
+  <script>
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('usuario');
+      window.location.href = 'index.html';
+    });
+  </script>
 </body>
 </html>

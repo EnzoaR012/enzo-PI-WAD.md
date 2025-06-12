@@ -268,3 +268,13 @@ section {
     font-size: 1rem;
   }
 }
+/* ============================================= */
+/*  COR DE FUNDO DA SIDEBAR                     */
+/* ============================================= */
+.sidebar {
+  /* use a cor que preferir: */
+  /* roxo escuro (primary) */
+  background-color: var(--cor-primaria);
+  /* ou verde escuro (secondary) */
+  /* background-color: var(--cor-secundaria); */
+}
