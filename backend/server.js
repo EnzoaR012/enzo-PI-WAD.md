@@ -47,12 +47,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // 6) SERVIR ARQUIVOS ESTÁTICOS DO FRONTEND
 //    Tudo dentro de "../frontend" ficará disponível sob "/"
-//    Exemplo: 
-//      "/index.html" → "../frontend/index.html"
-//      "/css/estilos.css" → "../frontend/css/estilos.css"
-//      "/js/reminder.js" → "../frontend/js/reminder.js"
-//      "/img/logo.png" → "../frontend/img/logo.png"
-//    ... e assim por diante para todo conteúdo estático do seu front.
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // 7) ROTA RAIZ ("/") → redireciona para a tela de login (index.html)
@@ -60,9 +54,8 @@ app.get('/', (req, res) => {
   res.redirect('/index.html');
 });
 
-// 8) EM CASO DE QUERER ENTREGAR CADA PÁGINA COM ROTA EXPLÍCITA
-//    (não é estritamente necessário, já que express.static cobre, 
-//     mas mantive aqui para que você tenha o controle “manual”):
+// 8) ENTREGAR AS PÁGINAS HTML EXPLICITAMENTE
+//    Se você quiser manter esses sendFile, ajuste o nome de newlist → newevent
 app.get('/index.html', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
@@ -75,8 +68,9 @@ app.get('/dashboard.html', (req, res) => {
 app.get('/reminders.html', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/reminders.html'));
 });
-app.get('/newlist.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/newlist.html'));
+// aqui, trocamos o antigo /newlist.html por /newevent.html
+app.get('/newevent.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/newevent.html'));
 });
 app.get('/daily.html', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/daily.html'));
@@ -87,14 +81,20 @@ app.get('/weekly.html', (req, res) => {
 app.get('/monthly.html', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/monthly.html'));
 });
+
+// 9) ROTA DE LOGOUT
 app.get('/logout', (req, res) => {
   return res.redirect('/index.html');
 });
+
+// 10) MONTAGEM DAS ROTAS DE API (JSON)
 app.use('/users',     userRoutes);
 app.use('/events',    eventRoutes);
 app.use('/tasks',     taskRoutes);
 app.use('/reminders', reminderRoutes);
 app.use('/lists',     listRoutes);
+
+// 11) INICIA O SERVIDOR
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);

@@ -1,8 +1,12 @@
+// backend/routes/eventRoutes.js
 const express = require('express');
-const router = express.Router();
-const EventController = require('../controllers/eventController');
+const router  = express.Router();
+const eventController = require('../controllers/eventController');
 
-router.get('/', EventController.getEvents);
-router.post('/', EventController.createEvent);
+// GET /events → lista todos os eventos
+router.get('/', eventController.list);
+
+// POST /events → cria um novo evento
+router.post('/', eventController.create);
 
 module.exports = router;
