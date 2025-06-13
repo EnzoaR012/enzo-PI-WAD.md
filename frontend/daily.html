@@ -45,6 +45,29 @@
       padding: 0.75rem;
       text-align: center;
       font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =============================== */
+    /*   Rótulo de hora e lista de    */
+    /*   eventos dentro da célula     */
+    /* =============================== */
+    .hour-label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .events-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    .events-list li {
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
     }
   </style>
 </head>
@@ -77,11 +100,10 @@
 
   <script src="js/daily.js"></script>
   <script>
-    document.getElementById('btn-logout').addEventListener('click', ()=>{
+    document.getElementById('btn-logout').addEventListener('click', () => {
       sessionStorage.removeItem('usuario');
-      window.location.href='index.html';
+      window.location.href = 'index.html';
     });
   </script>
 </body>
 </html>
-

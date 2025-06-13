@@ -8,7 +8,14 @@
   <style>
     /* === barra lateral === */
     .container { display: flex; min-height: 100vh; }
-    .sidebar { /* igual acima */ background-color: #333; width:220px; padding:var(--padding-base); display:flex; flex-direction:column; justify-content:space-between; }
+    .sidebar {
+      background-color: #333;
+      width: 220px;
+      padding: var(--padding-base);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
     .sidebar .logo img { max-width:100px; margin:0 auto 1.5rem; display:block; }
     .sidebar nav ul { list-style:none; padding:0; }
     .sidebar nav li { margin:.75rem 0; }
@@ -16,8 +23,17 @@
     .sidebar nav a.active, .sidebar nav a:hover { text-decoration:underline; }
     .sidebar .logout button { width:100%; }
 
-    .main-content { flex:1; padding:var(--padding-base); background-color:var(--cor-fundo); }
-    .main-content header h1 { font-size:var(--heading-2-size); color:var(--cor-primaria); margin-bottom:var(--padding-base); }
+    /* === conteúdo principal === */
+    .main-content {
+      flex:1;
+      padding:var(--padding-base);
+      background-color:var(--cor-fundo);
+    }
+    .main-content header h1 {
+      font-size:var(--heading-2-size);
+      color:var(--cor-primaria);
+      margin-bottom:var(--padding-base);
+    }
 
     /* === lista semanal === */
     .weekly-list {
@@ -58,22 +74,19 @@
 
     <main class="main-content">
       <header><h1>Lista Semanal</h1></header>
-      <ul class="weekly-list">
-        <li>Domingo</li>
-        <li>Segunda-feira</li>
-        <li>Terça-feira</li>
-        <li>Quarta-feira</li>
-        <li>Quinta-feira</li>
-        <li>Sexta-feira</li>
-        <li>Sábado</li>
+      <!-- O ID abaixo é essencial para o script localizar a UL -->
+      <ul id="weekly-list" class="weekly-list">
+        <!-- O conteúdo será injetado dinamicamente pelo js/weekly.js -->
       </ul>
     </main>
   </div>
 
+  <!-- Script de fetch e renderização da semana -->
+  <script src="js/weekly.js"></script>
   <script>
-    document.getElementById('btn-logout').addEventListener('click', ()=>{
+    document.getElementById('btn-logout').addEventListener('click', () => {
       sessionStorage.removeItem('usuario');
-      window.location.href='index.html';
+      window.location.href = 'index.html';
     });
   </script>
 </body>
