@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html lang="pt-BR"> 
+<head>   
+  <meta charset="UTF-8" />   
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />   
+  <title>Novo Evento • Meu Sistema</title>   
+  <link rel="stylesheet" href="css/estilos.css" />   
+  <style>     
+    /* layout igual ao reminders.html */     
+    .container { display: flex; min-height: 100vh; }     
+    .sidebar {       
+      background-color: #333;       
+      width: 220px;       
+      padding: var(--padding-base);       
+      display: flex;       
+      flex-direction: column;       
+      justify-content: space-between;     
+    }     
+    .sidebar .logo img { max-width: 100px; margin: 0 auto 1.5rem; display: block; }     
+    .sidebar nav ul { list-style: none; padding: 0; }     
+    .sidebar nav li { margin: 0.75rem 0; }     
+    .sidebar nav a { color: var(--cor-branco); text-decoration: none; font-weight: 500; }     
+    .sidebar nav a.active, .sidebar nav a:hover { text-decoration: underline; }     
+    .sidebar .logout button { width: 100%; }      
+    
+    .main-content {       
+      flex-grow: 1;       
+      padding: var(--padding-base);       
+      background-color: var(--cor-fundo);     
+    }     
+    .main-content header h1 {       
+      font-size: var(--heading-2-size);       
+      color: var(--cor-primaria);       
+      margin-bottom: var(--padding-base);     
+    }      
+    
+    /* estilos específicos do formulário de nova lista */     
+    .form-lista .form-group { margin-bottom: var(--padding-base); }     
+    .form-lista label { font-weight: bold; display: block; margin-bottom: .25rem; }     
+    .form-lista input { width: 100%; padding: .5rem; border: 1px solid #ccc; border-radius: var(--radius-base); }     
+    .form-lista button { margin-top: var(--padding-base); }   
+  </style> 
+</head> 
+<body>   
+  <div class="container">     
+    <!-- Sidebar idêntica ao reminders.html -->     
+    <aside class="sidebar">       
+      <div class="logo">         
+        <img src="img/logo.png" alt="Logo do Sistema" />       
+      </div>       
+      <nav>         
+        <ul>           
+          <li><a href="dashboard.html">Início</a></li>           
+          <li><a href="reminders.html">Lembretes</a></li>           
+          <li><a href="newlist.html" class="active">Novo Evento</a></li>           
+          <li><a href="daily.html">Lista Diária</a></li>           
+          <li><a href="weekly.html">Lista Semanal</a></li>           
+          <li><a href="monthly.html">Lista Mensal</a></li>         
+        </ul>       
+      </nav>       
+      <div class="logout">         
+        <button id="btn-logout" class="btn btn-secondary btn-normal">Logout</button>       
+      </div>     
+    </aside>      
+    
+    <!-- Conteúdo principal -->     
+    <main class="main-content">       
+      <header><h1>Novo Evento</h1></header>        
+      
+      <!-- Formulário para criar a lista -->       
+      <form id="form-lista" class="form-lista">         
+        <div class="form-group">           
+          <label for="lista-nome">Nome da Lista:</label>           
+          <input type="text" id="lista-nome" name="name" required />         
+        </div>         
+        <div class="form-group">           
+          <label for="lista-descricao">Descrição (opcional):</label>           
+          <input type="text" id="lista-descricao" name="description" />         
+        </div>         
+        <button type="submit" class="btn btn-primary btn-normal">Criar Evento</button>       
+      </form>     
+    </main>   
+  </div>    
+  
+  <script src="js/list.js"></script>   
+  <script>     
+    // mesmo logout de sempre     
+    document.getElementById('btn-logout').addEventListener('click', () => {       
+      sessionStorage.removeItem('usuario');       
+      window.location.href = 'index.html';     
+    });   
+  </script> 
+</body> 
+</html>

@@ -87,33 +87,14 @@ app.get('/weekly.html', (req, res) => {
 app.get('/monthly.html', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/monthly.html'));
 });
-
-// 9) ROTA DE LOGOUT (OPCIONAL):
-//    Se você quiser invalidar algo no servidor ao deslogar, 
-//    crie uma rota que limpe sessão, cookie, token etc.
-//    Neste exemplo, apenas redireciona para a tela de login.
 app.get('/logout', (req, res) => {
-  // aqui você poderia destruir sessão ou cookie, se aplicável
   return res.redirect('/index.html');
 });
-
-// 10) MONTAGEM DAS ROTAS DE API (JSON)
-//     Todas as rotas de API continuam funcionando normalmente:
 app.use('/users',     userRoutes);
 app.use('/events',    eventRoutes);
 app.use('/tasks',     taskRoutes);
 app.use('/reminders', reminderRoutes);
 app.use('/lists',     listRoutes);
-
-// 11) CATCH‐ALL OPICIONAL PARA FRONT‐END 
-//     Se você quiser que qualquer rota que não seja API seja redirecionada
-//     automaticamente para a tela de login, descomente abaixo:
-//
-// app.get('*', (req, res) => {
-//   res.redirect('/dashboard.html');
-// });
-
-// 12) INICIA O SERVIDOR
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
