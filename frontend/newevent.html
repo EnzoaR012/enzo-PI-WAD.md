@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Novo Evento • Meu Sistema</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <style>
+    /* === layout sidebar === */
+    .container { display: flex; min-height: 100vh; }
+    .sidebar {
+      background-color: #333;
+      width: 220px;
+      padding: var(--padding-base);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar .logo img { 
+      max-width: 100px; 
+      margin: 0 auto 1.5rem; 
+      display: block; 
+    }
+    .sidebar nav ul { list-style: none; padding: 0; }
+    .sidebar nav li { margin: .75rem 0; }
+    .sidebar nav a {
+      color: var(--cor-branco);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .sidebar nav a.active,
+    .sidebar nav a:hover { text-decoration: underline; }
+    .sidebar .logout button { width: 100%; }
+
+    /* === main content === */
+    .main-content {
+      flex-grow: 1;
+      padding: var(--padding-base);
+      background-color: var(--cor-fundo);
+    }
+    .main-content header h1 {
+      font-size: var(--heading-2-size);
+      color: var(--cor-primaria);
+      margin-bottom: var(--padding-base);
+    }
+
+    /* === form styling === */
+    .form-evento .form-group { margin-bottom: var(--padding-base); }
+    .form-evento label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: .25rem;
+    }
+    .form-evento input,
+    .form-evento textarea {
+      width: 100%;
+      padding: .5rem;
+      border: 1px solid #ccc;
+      border-radius: var(--radius-base);
+      font-family: var(--font-family);
+    }
+    .form-evento button {
+      margin-top: var(--padding-base);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="img/logo.png" alt="Logo do Sistema" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">Início</a></li>
+          <li><a href="reminders.html">Lembretes</a></li>
+          <li><a href="newevent.html" class="active">Novo Evento</a></li>
+          <li><a href="daily.html">Lista Diária</a></li>
+          <li><a href="weekly.html">Lista Semanal</a></li>
+          <li><a href="monthly.html">Lista Mensal</a></li>
+        </ul>
+      </nav>
+      <div class="logout">
+        <button id="btn-logout" class="btn btn-secondary btn-small">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+      <header>
+        <h1>Novo Evento</h1>
+      </header>
+
+      <form id="form-evento" class="form-evento">
+        <div class="form-group">
+          <label for="evento-title">Título:</label>
+          <input type="text" id="evento-title" name="title" required />
+        </div>
+        <div class="form-group">
+          <label for="evento-description">Descrição (opcional):</label>
+          <textarea id="evento-description" name="description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="evento-date">Data do Evento:</label>
+          <input type="date" id="evento-date" name="event_date" required />
+        </div>
+        <div class="form-group">
+          <label for="evento-time">Hora do Evento:</label>
+          <input type="time" id="evento-time" name="event_time" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-normal">Criar Evento</button>
+      </form>
+    </main>
+  </div>
+
+  <!-- script de submissão -->
+  <script src="js/event.js"></script>
+  <script>
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('usuario');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
