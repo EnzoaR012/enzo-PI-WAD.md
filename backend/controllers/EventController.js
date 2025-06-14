@@ -15,16 +15,12 @@ const EventController = {
       let events;
 
       if (date) {
-        // filtra pelo dia exato
         events = await eventService.getEventsByDate(date);
       } else if (weekStart && weekEnd) {
-        // filtra pelo intervalo (semana)
         events = await eventService.getEventsInRange(weekStart, weekEnd);
       } else if (month) {
-        // filtra pelo mês
         events = await eventService.getEventsByMonth(month);
       } else {
-        // todos
         events = await eventService.getAllEvents();
       }
 
@@ -32,6 +28,59 @@ const EventController = {
     } catch (err) {
       console.error('Erro listando eventos:', err);
       return res.status(500).json({ error: 'Erro ao listar eventos.' });
+    }
+  },
+
+  /**
+   * GET /events/diario?date=YYYY-MM-DD
+   */
+  listByDate: async (req, res) => {
+    try {
+      const { date } = req.query;
+      if (!date) {
+        return res.status(400).json({ error: 'Parâmetro "date" é obrigatório.' });
+      }
+      const events = await eventService.getEventsByDate(date);
+      return res.json(events);
+    } catch (err) {
+      console.error('Erro listando por data:', err);
+      return res.status(500).json({ error: 'Erro ao listar eventos por data.' });
+    }
+  },
+
+  /**
+   * GET /events/semanal?start=YYYY-MM-DD&end=YYYY-MM-DD
+   */
+  listByRange: async (req, res) => {
+    try {
+      const { start, end } = req.query;
+      if (!start || !end) {
+        return res
+          .status(400)
+          .json({ error: 'Parâmetros "start" e "end" são obrigatórios.' });
+      }
+      const events = await eventService.getEventsInRange(start, end);
+      return res.json(events);
+    } catch (err) {
+      console.error('Erro listando por intervalo:', err);
+      return res.status(500).json({ error: 'Erro ao listar eventos por intervalo.' });
+    }
+  },
+
+  /**
+   * GET /events/mensal?month=YYYY-MM
+   */
+  listByMonth: async (req, res) => {
+    try {
+      const { month } = req.query;
+      if (!month) {
+        return res.status(400).json({ error: 'Parâmetro "month" é obrigatório.' });
+      }
+      const events = await eventService.getEventsByMonth(month);
+      return res.json(events);
+    } catch (err) {
+      console.error('Erro listando por mês:', err);
+      return res.status(500).json({ error: 'Erro ao listar eventos por mês.' });
     }
   },
 

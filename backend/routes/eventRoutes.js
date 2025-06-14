@@ -1,21 +1,19 @@
 // backend/routes/eventRoutes.js
 const express = require('express');
 const router  = express.Router();
-const eventController = require('../controllers/eventController');
 
-// GET /events
-router.get('/', eventController.list);
+const {
+  list,
+  listByDate,
+  listByRange,
+  listByMonth,
+  create
+} = require('../controllers/eventController');
 
-// GET /events/diario?date=YYYY-MM-DD
-router.get('/diario', eventController.listByDate);
-
-// GET /events/semanal?start=YYYY-MM-DD&end=YYYY-MM-DD
-router.get('/semanal', eventController.listByRange);
-
-// GET /events/mensal?month=YYYY-MM
-router.get('/mensal', eventController.listByMonth);
-
-// POST /events
-router.post('/', eventController.create);
+router.get('/',        list);
+router.get('/diario',  listByDate);
+router.get('/semanal', listByRange);
+router.get('/mensal',  listByMonth);
+router.post('/',       create);
 
 module.exports = router;
