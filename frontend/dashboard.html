@@ -34,9 +34,11 @@
       margin-bottom: 2rem;
     }
     .sidebar .logo img {
-      max-width: 100px;
+      /* centraliza e limita o tamanho */
       display: block;
       margin: 0 auto;
+      max-width: 120px;
+      height: auto;
     }
     .sidebar nav ul {
       list-style: none;
@@ -71,7 +73,6 @@
       background-color: #f4f4f4;
     }
 
-    /* Se ainda quiser um header (titulo do painel) acima dos cards: */
     header {
       margin-bottom: 2rem;
       display: flex;
@@ -108,7 +109,7 @@
     .card a {
       text-decoration: none;
       display: inline-block;
-      margin-top: auto; /* empurra o botão pra baixo, se a descrição for muito curta */
+      margin-top: auto;
       text-align: center;
     }
 
@@ -145,14 +146,11 @@
 </head>
 <body>
   <div class="container">
-    <!-- ======================================= -->
-    <!--            SIDEBAR LATERAL             -->
-    <!-- ======================================= -->
+    <!-- SIDEBAR LATERAL -->
     <aside class="sidebar">
       <div class="logo">
-        <!-- Coloque aqui o seu logo, se tiver: 
-             exemplo: <img src="img/logo.png" alt="Logo"> -->
-        <img src="img/logo.png" alt="Logo do Sistema" />
+        <!-- agora puxa do /assets -->
+       <img src="/assets/Logoprojeto.png" alt="Logo do Sistema" />
       </div>
 
       <nav>
@@ -173,17 +171,12 @@
       </div>
     </aside>
 
-    <!-- ======================================= -->
-    <!--          CONTEÚDO PRINCIPAL             -->
-    <!-- ======================================= -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
-      <!-- Se quiser manter um header no conteúdo principal -->
       <header>
         <h1>Meu Painel</h1>
-        <!-- Obs: Se preferir só a sidebar, pode remover este header -->
       </header>
 
-      <!-- Seção de cards -->
       <section class="cards">
         <div class="card">
           <h2>Lembretes</h2>
@@ -210,7 +203,7 @@
   </div>
 
   <script>
-    // Lógica de logout: remove dados do sessionStorage e leva para index.html (login)
+    // Lógica de logout
     document.getElementById('btn-logout').addEventListener('click', () => {
       sessionStorage.removeItem('usuario');
       window.location.href = 'index.html';

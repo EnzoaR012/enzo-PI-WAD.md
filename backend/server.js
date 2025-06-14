@@ -1,6 +1,5 @@
 // backend/server.js
 
-// 1) Carrega variáveis de ambiente antes de tudo
 require('dotenv').config();
 console.log('🔹 server.js carregado, iniciando aplicação...');
 
@@ -8,9 +7,9 @@ const express = require('express');
 const cors    = require('cors');
 const path    = require('path');
 const app     = express();
-const pool    = require('./config/db'); // sua conexão com o DB
+const pool    = require('./config/db');
 
-// 2) Teste de conexão inicial ao banco de dados
+// 1) Teste de conexão
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
     console.error('❌ Erro ao conectar no DB:', err.message);
@@ -19,7 +18,7 @@ pool.query('SELECT NOW()', (err, res) => {
   }
 });
 
-// 3) Lista tabelas existentes para diagnóstico (opcional)
+// 2) Listar tabelas (opcional)
 pool.query(
   `SELECT table_name 
      FROM information_schema.tables 
@@ -33,68 +32,49 @@ pool.query(
   }
 );
 
-// 4) Importa rotas de API existentes
+// 3) Rotas de API
 const userRoutes     = require('./routes/userRoutes');
 const eventRoutes    = require('./routes/eventRoutes');
 const taskRoutes     = require('./routes/taskRoutes');
 const reminderRoutes = require('./routes/reminderRoutes');
 const listRoutes     = require('./routes/listRoutes');
 
-// 5) Middlewares
+// 4) Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 6) SERVIR ARQUIVOS ESTÁTICOS DO FRONTEND
-//    Tudo dentro de "../frontend" ficará disponível sob "/"
+// 5) Servir assets (pasta fora de frontend)
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
+
+// 6) Servir o frontend estático
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// 7) ROTA RAIZ ("/") → redireciona para a tela de login (index.html)
-app.get('/', (req, res) => {
-  res.redirect('/index.html');
-});
+// 7) Rota raiz → redireciona para login
+app.get('/', (req, res) => res.redirect('/index.html'));
 
-// 8) ENTREGAR AS PÁGINAS HTML EXPLICITAMENTE
-//    Se você quiser manter esses sendFile, ajuste o nome de newlist → newevent
-app.get('/index.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
-app.get('/register.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/register.html'));
-});
-app.get('/dashboard.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dashboard.html'));
-});
-app.get('/reminders.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/reminders.html'));
-});
-// aqui, trocamos o antigo /newlist.html por /newevent.html
-app.get('/newevent.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/newevent.html'));
-});
-app.get('/daily.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/daily.html'));
-});
-app.get('/weekly.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/weekly.html'));
-});
-app.get('/monthly.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/monthly.html'));
-});
+// 8) Enviar HTML explicitamente (opcional)
+//    Ajuste newlist → newevent
+app.get('/index.html',    (req, res) => res.sendFile(path.join(__dirname, '../frontend/index.html')));
+app.get('/register.html', (req, res) => res.sendFile(path.join(__dirname, '../frontend/register.html')));
+app.get('/dashboard.html',(req, res) => res.sendFile(path.join(__dirname, '../frontend/dashboard.html')));
+app.get('/reminders.html',(req, res) => res.sendFile(path.join(__dirname, '../frontend/reminders.html')));
+app.get('/newevent.html',(req, res) => res.sendFile(path.join(__dirname, '../frontend/newevent.html')));
+app.get('/daily.html',    (req, res) => res.sendFile(path.join(__dirname, '../frontend/daily.html')));
+app.get('/weekly.html',   (req, res) => res.sendFile(path.join(__dirname, '../frontend/weekly.html')));
+app.get('/monthly.html',  (req, res) => res.sendFile(path.join(__dirname, '../frontend/monthly.html')));
 
-// 9) ROTA DE LOGOUT
-app.get('/logout', (req, res) => {
-  return res.redirect('/index.html');
-});
+// 9) Logout
+app.get('/logout', (req, res) => res.redirect('/index.html'));
 
-// 10) MONTAGEM DAS ROTAS DE API (JSON)
+// 10) Montagem das APIs
 app.use('/users',     userRoutes);
 app.use('/events',    eventRoutes);
 app.use('/tasks',     taskRoutes);
 app.use('/reminders', reminderRoutes);
 app.use('/lists',     listRoutes);
 
-// 11) INICIA O SERVIDOR
+// 11) Iniciar servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
