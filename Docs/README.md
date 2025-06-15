@@ -1,109 +1,105 @@
 # enzo-PI-WAD.md
-# Projeto de Gestão de Eventos
+# PI-WAD • Sistema de Gestão de Eventos
 
-## Visão Geral
+Um sistema web de cadastro e gerenciamento de usuários, eventos, tarefas, lembretes e listas, desenvolvido como projeto acadêmico para demonstração de modelagem de dados em PostgreSQL, API REST em Node.js/Express e frontend em HTML/CSS/JavaScript puro.
 
-Sistema web para cadastro e gerenciamento de usuários, eventos e tarefas, desenvolvido como critério de avaliação de um projeto acadêmico. O objetivo é demonstrar a modelagem de dados em Supabase, criação de uma API REST em Node.js/Express e uma interface mínima em JavaScript puro.
+---
 
-## Funcionalidades
+## 📋 Funcionalidades
 
-* Cadastro, listagem e criação de usuários.
-* Cadastro, listagem e criação de eventos vinculados a usuários.
-* Cadastro, listagem e criação de tarefas vinculadas a eventos.
-* Exibição dinâmica dos dados em uma página web.
+- **Usuários**  
+  - Cadastro (POST `/users`)  
+  - Listagem (GET  `/users`)  
 
-## Tecnologias Utilizadas
+- **Eventos**  
+  - Criação de evento com título, descrição, data e hora (POST `/events`)  
+  - Listagem geral (GET  `/events`)  
+  - Filtros:
+    - Diário: GET `/events/diario?date=YYYY-MM-DD`
+    - Semanal: GET `/events/semanal?weekStart=YYYY-MM-DD&weekEnd=YYYY-MM-DD`
+    - Mensal: GET `/events/mensal?month=YYYY-MM`
 
-* **Banco de Dados**: Supabase (PostgreSQL)
-* **Backend**: Node.js, Express, pg (pool de conexões)
-* **Frontend**: HTML, CSS (inline) e JavaScript (Fetch API)
+- **Tarefas**  
+  - Criação vinculada a eventos (POST `/tasks`)  
+  - Listagem (GET  `/tasks`)  
 
-## Pré-requisitos
+- **Lembretes**  
+  - CRUD de lembretes (POST/GET/PUT/DELETE em `/reminders`)  
+  - Modal de criação/edição no frontend  
 
-* [Node.js](https://nodejs.org/) (versão 14 ou superior)
-* Conta e projeto criado no [Supabase](https://supabase.com)
-* Git instalado (opcional, para clonar o repositório)
+- **Listas**  
+  - Criação com escopo (`DIARIO`, `SEMANAL`, `MENSAL`, `CUSTOM`) (POST `/lists`)  
+  - Listagem geral ou por escopo (GET `/lists?scope=DIARIO|SEMANAL|MENSAL`)  
+  - Associação de tarefas (POST `/lists/task`)  
 
-## Instalação e Configuração
+- **Agendas**  
+  - **Lista Diária**: grid de 24 h (`daily.html` + `daily.js`)  
+  - **Lista Semanal**: lista de dias da semana (`weekly.html` + `weekly.js`)  
+  - **Lista Mensal**: calendário em tabela (`monthly.html` + `monthly.js`)  
 
-1. **Clone o repositório**
+---
 
+## 🔧 Tecnologias
+
+- **Banco de Dados**: PostgreSQL  
+- **Backend**:  
+  - Node.js  
+  - Express  
+  - `pg` (Postgres pool)  
+  - Arquitetura em camadas: _controllers_, _services_, _routes_  
+- **Frontend**:  
+  - HTML5 / CSS3 (variáveis, reset, responsividade)  
+  - JavaScript (Fetch API, DOM)  
+
+---
+
+## 🚀 Como Executar
+
+1. **Clone e instale**  
    ```bash
-   git clone https://github.com/EnzoaR012/enzo-PI-WAD.md.git
-   cd enzo-PI-WAD.md/backend
-   ```
-2. **Instale as dependências**
-
-   ```bash
+   git clone https://github.com/EnzoaR012/enzo-PI-WAD.git
+   cd enzo-PI-WAD/backend
    npm install
-   ```
-3. **Configure a conexão com o banco**
+ 
+**Endpoints da API**
+-Método	Rota	Descrição
+USERS		
+GET/users	Lista todos os usuários
+POST/users	Cria um novo usuário
 
-   * No Dashboard do Supabase, copie a **Connection String** (Transaction Pooler).
-   * Crie o arquivo `backend/.env` com:
+EVENTS		
+GET/events	Lista todos os eventos
+POST/events	Cria um novo evento
+GET/events/diario	Eventos de um dia (?date=YYYY-MM-DD)
+GET/events/semanal	Eventos em intervalo (?weekStart=…&weekEnd=…)
+GET/events/mensal	Eventos de um mês (?month=YYYY-MM)
 
-     ```env
-     DATABASE_URL=postgresql://postgres:SUA_SENHA@seu-host.supabase.co:5432/postgres
-     PORT=3000
-     ```
-4. **Migração do banco de dados**
+TASKS		
+GET/tasks	Lista todas as tarefas
+POST/tasks	Cria nova tarefa
 
-   Ainda em `backend/`, execute:
+REMINDERS		
+GET/reminders	Lista lembretes
+POST/reminders	Cria lembrete
+PUT/reminders/:id	Atualiza lembrete
+DELETE/reminders/:id	Deleta lembrete
 
-   ```bash
-   npm run migrate
-   ```
+LISTS		
+GET/lists	Lista todas as listas
+GET/lists?scope=DIARIO	Lista apenas escopo diário
+POST/lists	Cria lista ({ user_id, name, scope })
+POST/lists/task	Adiciona tarefa à lista ({ list_id, task_id })
 
-   Isso criará as tabelas `users`, `events` e `tasks` automaticamente.
+**Frontend**
+index.html: login/cadastro
+dashboard.html: cards de acesso rápido
+reminders.html: lista e modal de lembretes
+newevent.html: formulário de evento (título, descrição, data, hora)
+daily.html: grid de horas
+weekly.html: lista dos dias da semana
+monthly.html: calendário mensal
 
-## Execução
+Cada página carrega css/estilos.css e um <aside class="sidebar"> comum, com logo /assets/Logoprojeto.png, links e botão de logout.
 
-### Backend
-
-1. Dentro do diretório `backend/`, suba o servidor:
-
-   ```bash
-   npm start
-   ```
-
-2. No console, verifique as mensagens iniciais:
-
-   ```text
-   🔹 server.js carregado, iniciando aplicação...
-   ✅ Conectado ao DB. Horário do servidor: 2025-05-21T23:59:50.665Z
-   📚 Tabelas no DB: users, events, tasks
-   🚀 Servidor rodando em http://localhost:3000
-   ```
-
-3. Abra o navegador em:
-
-   ```
-   ```
-
-[http://localhost:3000](http://localhost:3000)
-
-```
-
-   Você verá uma página HTML listando todos os endpoints disponíveis como links interativos.
-
-### Frontend
-
-- Abra o arquivo `frontend/index.html` em seu navegador. A página carregará automaticamente as listas de usuários, eventos e tarefas.
-
-## Endpoints da API
-
-| Método | Rota      | Descrição                    |
-| ------ | --------- | ---------------------------- |
-| GET    | `/users`  | Lista todos os usuários      |
-| POST   | `/users`  | Cria um novo usuário         |
-| GET    | `/events` | Lista todos os eventos       |
-| POST   | `/events` | Cria um novo evento          |
-| GET    | `/tasks`  | Lista todas as tarefas       |
-| POST   | `/tasks`  | Cria uma nova tarefa         |
-
-## Como Utilizar
-
-1. Insira registros via API (cURL, Postman ou formulário frontend).
-2. Atualize o frontend para ver os dados em tempo real.
-
-
+**Conclusão**
+Durante o desenvolvimento do Projeto, construí uma API REST robusta em Node.js/Express, com conexão estável a um banco PostgreSQL para gerenciar usuários, eventos, tarefas, lembretes e listas, seguindo boas práticas de separação de responsabilidades entre controllers, services e routes. No frontend, entreguei uma interface leve em HTML/CSS/JS puro, com um design consistente de barra lateral e páginas dedicadas para login, dashboard, lembretes, cadastro de eventos (com data e hora), além de visualizações de agenda diária, semanal e mensal. Entre os pontos fortes estão a modularização do código, a tipagem clara dos endpoints, as validações tanto no cliente quanto no servidor e o uso de variáveis CSS para manter a identidade visual. Para melhorar, sugeri implementar autenticação real (por exemplo, JWT), injetar dinamicamente os eventos nas visualizações de agenda, adicionar recursos de edição e exclusão de eventos no calendário, e evoluir para uma PWA com notificações em tempo real e suporte offline. Esses avanços tornariam o sistema mais completo, seguro e interativo, elevando a experiência do usuário e a confiabilidade da aplicação.
