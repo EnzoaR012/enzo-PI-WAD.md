@@ -435,7 +435,7 @@ Cada recurso (Users, Events, Tasks, Reminders, Lists) segue o padrão:
 -Métodos especializados filtram por data (WHERE DATE(event_datetime)=…), intervalo semanal ou mês (TO_CHAR(event_datetime,'YYYY-MM') = …).
 
 A camada de modelagem de dados no PostgreSQL define tabelas com UUIDs, chaves estrangeiras referenciando integridade (por exemplo, reminders.user_id → users.id) e campos de timestamp.Internamente, o server.js conecta todas as routes (app.use('/events', eventRoutes) etc.) após configurar o middleware JSON e CORS, e inicializa o servidor em http://localhost:3000. No frontend, cada página HTML herda um layout uniforme: 
--<aside class="sidebar"> com a logo (<img src="/assets/Logoprojeto.png">), links de navegação e botão de logout que limpa sessionStorage e redireciona ao login.
+-Links de navegação e botão de logout que limpa sessionStorage e redireciona ao login.
 -O CSS global (css/estilos.css) usa CSS Custom Properties para cores, tipografia e espaçamentos, além de regras de reset e responsividade básica.
 
 Cada página carrega um script em JS específico sendo esses:
@@ -554,6 +554,8 @@ Em geral o site entrega uma jornada completa de cadastro e login, criação e li
     <sup>Fonte: Material produzido pelo autore, 2025</sup>
   </figcaption>
 </figure>
+
+https://drive.google.com/file/d/1RotuUP5Mq8FGaaInUDHyK9CsKUuf1bgl/view?usp=sharing
 
 ### 4.2 Conclusões e Trabalhos Futuros (Semana 8)
 
