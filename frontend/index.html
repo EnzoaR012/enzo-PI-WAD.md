@@ -3,32 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Gerenciamento de Eventos</title>
+  <title>Bem-vindo • Uriel’s</title>
+  <link rel="stylesheet" href="css/estilos.css" />
   <style>
-    body { font-family: sans-serif; margin: 2rem; }
-    h2 { margin-top: 1.5rem; }
-    ul { list-style: none; padding: 0; }
-    li { margin-bottom: .5rem; }
+    /* Estilos específicos para a tela de login mobile */
+    .login-container {
+      max-width: 360px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    .login-container h1 {
+      font-size: var(--heading-2-size);
+      margin-bottom: 2rem;
+      color: var(--cor-primaria);
+      font-family: var(--font-family);
+    }
+    .login-box {
+      background-color: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-base);
+      padding: 2rem 1rem;
+    }
+    .login-box form {
+      display: flex;
+      flex-direction: column;
+    }
+    .input-field {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: var(--radius-base);
+      font-family: var(--font-family);
+    }
+    .btn-block {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #aaa;
+    }
+    .divider::before { margin-right: 0.5em; }
+    .divider::after  { margin-left: 0.5em; }
   </style>
 </head>
 <body>
-  <h1>Dashboard de Eventos</h1>
+  <div class="login-container">
+    <h1>Bem-vindo ao Uriel’s</h1>
+    <div class="login-box">
+      <form id="login-form">
+        <input type="email" id="login-email" class="input-field" placeholder="Email" required />
+        <input type="password" id="login-password" class="input-field" placeholder="Senha" required />
+        <button type="submit" class="btn btn-primary btn-normal btn-block">Login</button>
+      </form>
 
-  <section id="users-section">
-    <h2>Usuários</h2>
-    <ul id="users-list">Carregando...</ul>
-  </section>
+      <div class="divider">OU</div>
 
-  <section id="events-section">
-    <h2>Eventos</h2>
-    <ul id="events-list">Carregando...</ul>
-  </section>
+      <a href="register.html" class="btn btn-secondary btn-normal btn-block">Cadastre-se</a>
+    </div>
+  </div>
 
-  <section id="tasks-section">
-    <h2>Tarefas</h2>
-    <ul id="tasks-list">Carregando...</ul>
-  </section>
-
-  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>

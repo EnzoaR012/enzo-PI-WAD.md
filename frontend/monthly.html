@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Lista Mensal • Meu Sistema</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <style>
+    /* === layout: sidebar + conteúdo === */
+    .container { display: flex; min-height: 100vh; }
+    .sidebar {
+      background-color: #333;
+      width: 220px;
+      padding: var(--padding-base);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar .logo img { 
+      max-width: 100px; 
+      margin: 0 auto 1.5rem; 
+      display: block; 
+    }
+    .sidebar nav ul { list-style: none; padding: 0; }
+    .sidebar nav li { margin: .75rem 0; }
+    .sidebar nav a { 
+      color: var(--cor-branco); 
+      text-decoration: none; 
+      font-weight: 500; 
+    }
+    .sidebar nav a.active,
+    .sidebar nav a:hover { text-decoration: underline; }
+    .sidebar .logout button { width: 100%; }
+
+    .main-content {
+      flex: 1;
+      padding: var(--padding-base);
+      background-color: var(--cor-fundo);
+    }
+    .main-content header h1 {
+      font-size: var(--heading-2-size);
+      color: var(--cor-primaria);
+      margin-bottom: var(--padding-base);
+    }
+
+    /* === calendário mensal === */
+    .monthly-calendar {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .monthly-calendar th,
+    .monthly-calendar td {
+      border: 1px solid #ddd;
+      vertical-align: top;
+      width: 14.28%;
+      height: 100px;
+      padding: 0.25rem;
+    }
+    .monthly-calendar th {
+      background-color: var(--cor-branco);
+      color: var(--cor-primaria);
+      font-weight: bold;
+      text-align: center;
+    }
+    .day-number {
+      font-weight: bold;
+      text-align: right;
+      margin-bottom: 0.25rem;
+    }
+    .day-events {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.8rem;
+      max-height: 75px;
+      overflow-y: auto;
+    }
+    .day-events li {
+      margin-bottom: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+    <!-- SIDEBAR LATERAL -->
+    <aside class="sidebar">
+      <div class="logo">
+        <!-- agora puxa do /assets -->
+       <img src="/assets/Logoprojeto.png" alt="Logo do Sistema" />
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">Início</a></li>
+          <li><a href="reminders.html">Lembretes</a></li>
+          <li><a href="newevent.html">Novo Evento</a></li>
+          <li><a href="daily.html">Lista Diária</a></li>
+          <li><a href="weekly.html">Lista Semanal</a></li>
+          <li><a href="monthly.html" class="active">Lista Mensal</a></li>
+        </ul>
+      </nav>
+      <div class="logout">
+        <button id="btn-logout" class="btn btn-secondary btn-normal">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+      <header><h1>Lista Mensal</h1></header>
+
+      <table id="monthly-calendar" class="monthly-calendar">
+        <thead>
+          <tr>
+            <th>Dom</th><th>Seg</th><th>Ter</th>
+            <th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- linhas do calendário serão geradas pelo JS -->
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <script src="js/monthly.js"></script>
+  <script>
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('usuario');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

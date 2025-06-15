@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Dashboard • Meu Sistema</title>
+
+  <!-- 1) link para o seu CSS global -->
+  <link rel="stylesheet" href="css/estilos.css" />
+
+  <!-- 2) CSS específico para a dashboard (sidebar + layout de cards) -->
+  <style>
+    /* ----------------------------------------------- */
+    /* Container geral: sidebar + main-content          */
+    /* ----------------------------------------------- */
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ----------------------------------------------- */
+    /*           SIDEBAR LATERAL                       */
+    /* ----------------------------------------------- */
+    .sidebar {
+      background-color: #e0e0e0;
+      width: 220px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* logo/menu no topo e logout no fim */
+    }
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .sidebar .logo img {
+      /* centraliza e limita o tamanho */
+      display: block;
+      margin: 0 auto;
+      max-width: 120px;
+      height: auto;
+    }
+    .sidebar nav ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .sidebar nav li {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .sidebar nav li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    .sidebar nav li a:hover {
+      text-decoration: underline;
+    }
+    .sidebar .logout {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .sidebar .logout button {
+      width: 100%;
+    }
+
+    /* ----------------------------------------------- */
+    /*               CONTEÚDO PRINCIPAL                */
+    /* ----------------------------------------------- */
+    .main-content {
+      flex-grow: 1;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: var(--heading-2-size);
+      color: var(--cor-primaria);
+    }
+
+    /* ----------------------------------------------- */
+    /*          LAYOUT DE CARDS DENTRO DO MAIN          */
+    /* ----------------------------------------------- */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background-color: var(--cor-branco);
+      border-radius: var(--radius-base);
+      padding: 1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card h2 {
+      font-size: var(--heading-3-size);
+      margin-bottom: 1rem;
+      color: var(--cor-primaria);
+    }
+    .card a {
+      text-decoration: none;
+      display: inline-block;
+      margin-top: auto;
+      text-align: center;
+    }
+
+    /* ----------------------------------------------- */
+    /*                  RESPONSIVIDADE                 */
+    /* ----------------------------------------------- */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+      }
+      .sidebar .logo {
+        display: none;
+      }
+      .sidebar nav {
+        display: flex;
+      }
+      .sidebar nav ul {
+        display: flex;
+        gap: 1rem;
+      }
+      .sidebar nav li {
+        margin-bottom: 0;
+      }
+      .sidebar .logout {
+        margin-top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- SIDEBAR LATERAL -->
+    <aside class="sidebar">
+      <div class="logo">
+        <!-- agora puxa do /assets -->
+       <img src="/assets/Logoprojeto.png" alt="Logo do Sistema" />
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">Início</a></li>
+          <li><a href="reminders.html">Lembretes</a></li>
+          <li><a href="newevent.html">Novo Evento</a></li>
+          <li><a href="daily.html">Lista Diária</a></li>
+          <li><a href="weekly.html">Lista Semanal</a></li>
+          <li><a href="monthly.html">Lista Mensal</a></li>
+        </ul>
+      </nav>
+
+      <div class="logout">
+        <button id="btn-logout" class="btn btn-secondary btn-small">
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+      <header>
+        <h1>Meu Painel</h1>
+      </header>
+
+      <section class="cards">
+        <div class="card">
+          <h2>Lembretes</h2>
+          <a href="reminders.html" class="btn btn-primary btn-normal">Ver Lembretes</a>
+        </div>
+        <div class="card">
+          <h2>Novo Evento</h2>
+          <a href="newevent.html" class="btn btn-primary btn-normal">Adicionar Evento</a>
+        </div>
+        <div class="card">
+          <h2>Lista Diária</h2>
+          <a href="daily.html" class="btn btn-primary btn-normal">Ver Diária</a>
+        </div>
+        <div class="card">
+          <h2>Lista Semanal</h2>
+          <a href="weekly.html" class="btn btn-primary btn-normal">Ver Semanal</a>
+        </div>
+        <div class="card">
+          <h2>Lista Mensal</h2>
+          <a href="monthly.html" class="btn btn-primary btn-normal">Ver Mensal</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Lógica de logout
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('usuario');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
